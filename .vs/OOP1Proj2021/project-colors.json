@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "241c0212-325c-4c60-9d50-f63eda0a8ff2": {
+      "ProjectGuid": "241c0212-325c-4c60-9d50-f63eda0a8ff2",
+      "DisplayName": "Painter",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
