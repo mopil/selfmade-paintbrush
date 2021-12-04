@@ -141,13 +141,17 @@
   <ItemGroup>
     <ClInclude Include="ActionListener.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="frame.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="Misc.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ActionListener.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="frame.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="Misc.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

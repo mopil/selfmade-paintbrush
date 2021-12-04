@@ -4,14 +4,15 @@
 #include <list>
 #include "Misc.h"
 #include "ActionListener.h"
+#include "Component.h"
 using namespace std;
 
 class Frame;
 class ActionListener;
-class Button {
+class Button : public Component{
 protected:
-	int left_, top_, right_, bottom_;
-	HDC hDC_;
+	//int left_, top_, right_, bottom_;
+	//HDC hDC_;
 	string btn_name_;
 	
 	std::list<ActionListener*> listeners_;
