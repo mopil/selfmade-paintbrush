@@ -27,7 +27,7 @@ public:
 			break;
 		case CIRCLE_TYPE:
 			OutputDebugString(L"타원 버튼 눌러 짐\n");
-			container_->setShape(CIRCLE_TYPE);
+			container_->setShape(CIRCLE_TYPE);//
 			break;
 		}
 	}
