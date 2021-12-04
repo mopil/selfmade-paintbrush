@@ -1,7 +1,4 @@
-﻿  Button.cpp
-  frame.cpp
-C:\Users\mopil\source\repos\OOP1Proj2021\MyGUILib\frame.cpp(86,48): warning C4302: '형식 캐스트': 'LPWSTR'에서 'WORD'(으)로 잘립니다.
-  Misc.cpp
+﻿  ActionListener.cpp
+  Button.cpp
   코드를 생성하고 있습니다...
-C:\Users\mopil\source\repos\OOP1Proj2021\MyGUILib\frame.cpp(43): warning C4715: 'WndProc': 모든 제어 경로에서 값을 반환하지는 않습니다.
   MyGUILib.vcxproj -> C:\Users\mopil\source\repos\OOP1Proj2021\x64\Debug\MyGUILib.lib

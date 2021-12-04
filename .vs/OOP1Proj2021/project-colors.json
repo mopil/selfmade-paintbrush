@@ -5,7 +5,12 @@
       "ProjectGuid": "241c0212-325c-4c60-9d50-f63eda0a8ff2",
       "DisplayName": "Painter",
       "ColorIndex": 0
+    },
+    "68d1d1a3-ffc3-4a44-a851-7379330dc067": {
+      "ProjectGuid": "68d1d1a3-ffc3-4a44-a851-7379330dc067",
+      "DisplayName": "MyGUILib",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

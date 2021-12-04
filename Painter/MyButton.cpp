@@ -1,28 +1,14 @@
 #include "MyButton.h"
 #include "PainterFrame.h"
 
-MyButton::MyButton(HDC hDC, int l, int t, int r, int b, std::string btnName,int type, PainterFrame *parent)
-	: Button(hDC, l, t, r, b, btnName),type_(type),parent_(parent)
+MyButton::MyButton(HDC hDC, int l, int t, int r, int b, std::string btnName,int type)
+	: Button(hDC, l, t, r, b, btnName),type_(type)
 {
 	// empty
 }
 
 
-void MyButton::onClick(MyEvent e) {
-	switch (type_) {
-	case RECT_TYPE:
-		OutputDebugString(L"사각형 버튼 눌러 짐\n");
-		parent_->setShape(RECT_TYPE);
-		break;
-	case CIRCLE_TYPE:
-		OutputDebugString(L"타원 버튼 눌러 짐\n");
-		parent_->setShape(CIRCLE_TYPE);
-		break;
-	}
-}
-
-
-void MyButton::show() {
+void MyButton::draw() {
 	int correctX=0, correctY=0;
 	switch (type_) {
 	case RECT_TYPE:

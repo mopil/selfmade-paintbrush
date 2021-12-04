@@ -1,19 +1,27 @@
 #pragma once
 #include <Windows.h>
 #include <string>
+#include <list>
 #include "Misc.h"
+#include "ActionListener.h"
 using namespace std;
 
 class Frame;
+class ActionListener;
 class Button {
 protected:
 	int left_, top_, right_, bottom_;
 	HDC hDC_;
 	string btn_name_;
+	
+	std::list<ActionListener*> listeners_;
+
 public:
 	Button(HDC hDC, int l, int t, int r, int b, string btnName);
-	virtual void show() = 0;
-	virtual void onClick(MyEvent e) = 0;
+	virtual void draw() = 0;
+	void onClick();
 	bool isIn(MyPoint pos);
+
+	void addActionListener(ActionListener* l);
 
 };

@@ -7,8 +7,31 @@
 #include <iostream>
 #include "MyButton.h"
 #include "Button.h"
+#include "ActionListener.h"
 // 일단은 전역 변수 1개는 사용한다.
 int shape_;
+
+class SetShapeActionListener : public ActionListener {
+private:
+	PainterFrame* container_ = nullptr;
+	int type_;
+	static const int RECT_TYPE = 2;
+	static const int CIRCLE_TYPE = 3;
+public:
+	SetShapeActionListener(PainterFrame* f, int type) :container_(f), type_(type) {}
+	void actionPerformed() override {
+		switch (type_) {
+		case RECT_TYPE:
+			OutputDebugString(L"사각형 버튼 눌러 짐\n");
+			container_->setShape(RECT_TYPE);
+			break;
+		case CIRCLE_TYPE:
+			OutputDebugString(L"타원 버튼 눌러 짐\n");
+			container_->setShape(CIRCLE_TYPE);
+			break;
+		}
+	}
+};
 
 PainterFrame::PainterFrame() :PainterFrame(L"", 800, 600) {
 	//
@@ -25,7 +48,7 @@ void PainterFrame::eventHandler(MyEvent e)
 		end_ = e.getPos();
 		Button* selectedButton = findClickedButton();
 		if (selectedButton != nullptr)
-			selectedButton->onClick(e);
+			selectedButton->onClick();
 		if (e.isShiftKeyDown()) {
 			createGroup();
 		}
@@ -57,7 +80,7 @@ void PainterFrame::eventHandler(MyEvent e)
 void PainterFrame::repaint() {
 	// 버튼 그리기
 	for (auto i = myButtonList.begin(); i != myButtonList.end(); i++) {
-		(*i)->show();
+		(*i)->draw();
 	}
 
 	// 도형 그리기
@@ -110,11 +133,14 @@ Button* PainterFrame::findClickedButton() {
 }
 
 void PainterFrame::init() {
-	MyButton* btnRect = new MyButton(hDC_, 5, 5, 100, 50, "Rectangle", RECTANGLE, this);
-	MyButton* btnCircle = new MyButton(hDC_, 120, 5, 215, 50, "Circle", CIRCLE, this);
+	MyButton* btnRect = new MyButton(hDC_, 5, 5, 100, 50, "Rectangle", RECTANGLE);
+	MyButton* btnCircle = new MyButton(hDC_, 120, 5, 215, 50, "Circle", CIRCLE);
 	myButtonList.push_back(btnRect);
 	myButtonList.push_back(btnCircle);
-	btnRect->show();
-	btnCircle->show();
+	btnRect->addActionListener(new SetShapeActionListener(this, RECTANGLE));
+	btnCircle->addActionListener(new SetShapeActionListener(this, CIRCLE));
+	btnRect->draw();
+	btnCircle->draw();
+
 }
 
