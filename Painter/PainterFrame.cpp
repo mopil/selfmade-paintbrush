@@ -182,9 +182,8 @@ void PainterFrame::init() {
 	myButtonList.push_back(btnCircle);
 	btnRect->addActionListener(new SetShapeActionListener(this, RECTANGLE));
 	btnCircle->addActionListener(new SetShapeActionListener(this, CIRCLE));
-	btnRect->draw(RECT_CORRECT_X, RECT_CORRECT_Y);
-	btnCircle->draw(CIRCLE_CORRECT_X, CIRCLE_CORRECT_Y);
 
+	// 라벨 설정
 	MyLabel* labelMain = new MyLabel(hDC_, 230, 5, 965, 115, "MAIN");
 	myLabelList.push_back(labelMain);
 
