@@ -37,6 +37,19 @@ public:
 	}
 };
 
+class SetLabelActionListener : public ActionListener {
+private:
+	MyLabel* label_;
+	string title_;
+
+public:
+	SetLabelActionListener(MyLabel* l, string title) :label_(l),title_(title) {}
+	void actionPerformed() override {
+		label_->setTitle(title_);
+	}
+
+};
+
 PainterFrame::PainterFrame() :PainterFrame(L"", 800, 600) {
 	//
 }
@@ -95,6 +108,14 @@ void PainterFrame::repaint() {
 			cX = CIRCLE_CORRECT_X;
 			cY = CIRCLE_CORRECT_Y;
 			break;
+		case APPLE:
+			cX = APPLE_CORRECT_X;
+			cY = APPLE_CORRECT_Y;
+			break;
+		case BANANA:
+			cX = BANANA_CORRECT_X;
+			cY = BANANA_CORRECT_Y;
+			break;
 		}
 		(*i)->draw(cX,cY);
 	}
@@ -102,6 +123,11 @@ void PainterFrame::repaint() {
 	// 도형 그리기
 	for (auto i = myGroupList.begin(); i != myGroupList.end(); i++) {
 		(*i)->draw();
+	}
+
+	// 라벨 그리기
+	for (auto i = myLabelList.begin(); i != myLabelList.end(); i++) {
+		(*i)->draw(0,0);
 	}
 
 }
@@ -159,8 +185,13 @@ void PainterFrame::init() {
 	btnRect->draw(RECT_CORRECT_X, RECT_CORRECT_Y);
 	btnCircle->draw(CIRCLE_CORRECT_X, CIRCLE_CORRECT_Y);
 
+	MyLabel* labelMain = new MyLabel(hDC_, 230, 5, 965, 115, "MAIN");
+	myLabelList.push_back(labelMain);
+
 	MyButton* btnApple = new MyButton(hDC_, 5, 70, 100, 115, "Apple", APPLE);
 	MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", APPLE);
+	btnApple->addActionListener(new SetLabelActionListener(labelMain, "Apple"));
+	btnBanana->addActionListener(new SetLabelActionListener(labelMain, "Banana"));
 	myButtonList.push_back(btnApple);
 	myButtonList.push_back(btnBanana);
 

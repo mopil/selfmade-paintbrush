@@ -6,6 +6,7 @@
 #include "Figure.h"
 #include "MyButton.h"
 #include "frame.h"
+#include "MyLabel.h"
 
 class MyButton;
 class PainterFrame : public Frame{
@@ -18,6 +19,7 @@ protected:
 	// 도형, 그룹 박스를 저장하는 리스트
 	std::list<Group*> myGroupList;
 	std::list<MyButton*> myButtonList;
+	std::list<MyLabel*> myLabelList;
 
 	// 도형 타입 변수 설정
 	static const int NONE = 1;
@@ -29,6 +31,11 @@ protected:
 	static const int RECT_CORRECT_Y = 8;
 	static const int CIRCLE_CORRECT_X = 18;
 	static const int CIRCLE_CORRECT_Y = 6;
+
+	static const int APPLE_CORRECT_X = 18;
+	static const int APPLE_CORRECT_Y = 8;
+	static const int BANANA_CORRECT_X = 16;
+	static const int BANANA_CORRECT_Y = 6;
 
 
 	static const int APPLE = 4;
