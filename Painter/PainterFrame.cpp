@@ -17,6 +17,7 @@ private:
 	int type_;
 	static const int RECT_TYPE = 2;
 	static const int CIRCLE_TYPE = 3;
+	static const int APPLE = 4;
 public:
 	SetShapeActionListener(PainterFrame* f, int type) :container_(f), type_(type) {}
 	void actionPerformed() override {
@@ -27,7 +28,10 @@ public:
 			break;
 		case CIRCLE_TYPE:
 			OutputDebugString(L"타원 버튼 눌러 짐\n");
-			container_->setShape(CIRCLE_TYPE);//
+			container_->setShape(CIRCLE_TYPE);
+			break;
+		case APPLE:
+			OutputDebugString(L"사과 버튼 눌러 짐\n");
 			break;
 		}
 	}
@@ -46,9 +50,10 @@ void PainterFrame::eventHandler(MyEvent e)
 	}
 	else if (e.isLButtonUp()) {
 		end_ = e.getPos();
-		Button* selectedButton = findClickedButton();
-		if (selectedButton != nullptr)
+		MyButton* selectedButton = findClickedButton(end_);
+		if (selectedButton != nullptr) {
 			selectedButton->onClick();
+		}
 		if (e.isShiftKeyDown()) {
 			createGroup();
 		}
@@ -80,7 +85,18 @@ void PainterFrame::eventHandler(MyEvent e)
 void PainterFrame::repaint() {
 	// 버튼 그리기
 	for (auto i = myButtonList.begin(); i != myButtonList.end(); i++) {
-		(*i)->draw();
+		int cX = 0, cY = 0;
+		switch ((*i)->getType()) {
+		case RECTANGLE:
+			cX = RECT_CORRECT_X;
+			cY = RECT_CORRECT_Y;
+			break;
+		case CIRCLE:
+			cX = CIRCLE_CORRECT_X;
+			cY = CIRCLE_CORRECT_Y;
+			break;
+		}
+		(*i)->draw(cX,cY);
 	}
 
 	// 도형 그리기
@@ -122,9 +138,10 @@ Group * PainterFrame::findClickedElement(MyPoint pos) {
 	return nullptr;
 }
 
-Button* PainterFrame::findClickedButton() {
+MyButton* PainterFrame::findClickedButton(MyPoint pos) {
 	for (auto btn = myButtonList.begin(); btn != myButtonList.end(); btn++) {
-		if ((*btn)->isIn(start_) == true) {
+		if ((*btn)->isIn(pos) == true) {
+			OutputDebugString(L"버튼 선택 됨\n");
 			return (*btn);
 		}
 	}
@@ -139,8 +156,13 @@ void PainterFrame::init() {
 	myButtonList.push_back(btnCircle);
 	btnRect->addActionListener(new SetShapeActionListener(this, RECTANGLE));
 	btnCircle->addActionListener(new SetShapeActionListener(this, CIRCLE));
-	btnRect->draw();
-	btnCircle->draw();
+	btnRect->draw(RECT_CORRECT_X, RECT_CORRECT_Y);
+	btnCircle->draw(CIRCLE_CORRECT_X, CIRCLE_CORRECT_Y);
+
+	MyButton* btnApple = new MyButton(hDC_, 5, 70, 100, 115, "Apple", APPLE);
+	MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", APPLE);
+	myButtonList.push_back(btnApple);
+	myButtonList.push_back(btnBanana);
 
 }
 

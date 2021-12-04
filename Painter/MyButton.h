@@ -10,7 +10,8 @@ private:
 	static const int CIRCLE_TYPE = 3;
 	int type_;
 public:
-	MyButton(HDC hDC, int l, int t, int r, int b, std::string btnName,int type);
-	void draw() override;
+	MyButton(HDC hDC, int l, int t, int r, int b, std::string title,int type);
+	//void draw(int correctX, int correctY) override;
+	int getType();
 };
 

@@ -1,8 +1,8 @@
 #include "Button.h"
 #include "ActionListener.h"
 
-Button::Button(HDC hDC, int l, int t, int r, int b, std::string btnName)
-	: Component(hDC,l,t,r,b), btn_name_(btnName)
+Button::Button(HDC hDC, int l, int t, int r, int b, std::string title)
+	: Component(hDC,l,t,r,b,title)
 {
 	// empty
 }

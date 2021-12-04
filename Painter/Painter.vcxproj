@@ -145,6 +145,7 @@
     <ClInclude Include="Group.h" />
     <ClInclude Include="GroupBox.h" />
     <ClInclude Include="MyButton.h" />
+    <ClInclude Include="MyLabel.h" />
     <ClInclude Include="PainterFrame.h" />
     <ClInclude Include="Rect.h" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClCompile Include="GroupBox.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyButton.cpp" />
+    <ClCompile Include="MyLabel.cpp" />
     <ClCompile Include="PainterFrame.cpp" />
     <ClCompile Include="Rect.cpp" />
   </ItemGroup>
