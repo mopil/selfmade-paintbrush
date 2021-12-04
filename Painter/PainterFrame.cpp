@@ -193,6 +193,5 @@ void PainterFrame::init() {
 	btnBanana->addActionListener(new SetLabelActionListener(labelMain, "Banana"));
 	myButtonList.push_back(btnApple);
 	myButtonList.push_back(btnBanana);
-
 }
 
