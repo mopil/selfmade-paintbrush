@@ -15,7 +15,7 @@ protected:
 
 public:
 	Button(HDC hDC, int l, int t, int r, int b, string title);
-	void onClick();
+	virtual void onClick();
 	bool isIn(MyPoint pos);
 
 	void addActionListener(ActionListener* l);

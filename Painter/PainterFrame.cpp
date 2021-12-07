@@ -8,6 +8,8 @@
 #include "MyButton.h"
 #include "Button.h"
 #include "ActionListener.h"
+#include "MyMenuBar.h"
+
 // 일단은 전역 변수 1개는 사용한다.
 int shape_;
 
@@ -160,23 +162,27 @@ MyButton* PainterFrame::findClickedButton(MyPoint pos) {
 }
 
 void PainterFrame::init() {
-	MyButton* btnRect = new MyButton(hDC_, 5, 5, 100, 50, "Rectangle", RECTANGLE);
-	MyButton* btnCircle = new MyButton(hDC_, 120, 5, 215, 50, "Circle", CIRCLE);
-	componentList.push_back(btnRect);
-	componentList.push_back(btnCircle);
-	btnRect->addActionListener(new SetShapeActionListener(this, RECTANGLE));
-	btnCircle->addActionListener(new SetShapeActionListener(this, CIRCLE));
+	//MyButton* btnRect = new MyButton(hDC_, 5, 5, 100, 50, "Rectangle", RECTANGLE);
+	//MyButton* btnCircle = new MyButton(hDC_, 120, 5, 215, 50, "Circle", CIRCLE);
+	//componentList.push_back(btnRect);
+	//componentList.push_back(btnCircle);
+	//btnRect->addActionListener(new SetShapeActionListener(this, RECTANGLE));
+	//btnCircle->addActionListener(new SetShapeActionListener(this, CIRCLE));
 
-	// 라벨 설정
-	MyLabel* labelMain = new MyLabel(hDC_, 230, 5, 965, 115, "MAIN");
-	componentList.push_back(labelMain);
+	//// 라벨 설정
+	//MyLabel* labelMain = new MyLabel(hDC_, 230, 5, 965, 115, "MAIN");
+	//componentList.push_back(labelMain);
 
-	MyButton* btnReset = new MyButton(hDC_, 5, 70, 100, 115, "Reset", RESET);
-	MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", BANANA);
-	btnReset->addActionListener(new ResetActionListener(this, &myGroupList));
-	btnBanana->addActionListener(new SetLabelActionListener(labelMain, "Banana"));
-	componentList.push_back(btnReset);
-	componentList.push_back(btnBanana);
+	//MyButton* btnReset = new MyButton(hDC_, 5, 70, 100, 115, "Reset", RESET);
+	//MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", BANANA);
+	//btnReset->addActionListener(new ResetActionListener(this, &myGroupList));
+	//btnBanana->addActionListener(new SetLabelActionListener(labelMain, "Banana"));
+	//componentList.push_back(btnReset);
+	//componentList.push_back(btnBanana);
+
+	MyMenuBar* menuBar = new MyMenuBar(hDC_, 0, 0, 1000, 60, "메인메뉴바");
+	componentList.push_back(menuBar);
+	menuBar->init();
 }
 
 void PainterFrame::resetList(list<Group*> *groupList) {
