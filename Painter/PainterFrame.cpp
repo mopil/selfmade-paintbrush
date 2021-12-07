@@ -17,7 +17,6 @@ private:
 	int type_;
 	static const int RECT_TYPE = 2;
 	static const int CIRCLE_TYPE = 3;
-	static const int APPLE = 4;
 public:
 	SetShapeActionListener(PainterFrame* f, int type) :container_(f), type_(type) {}
 	void actionPerformed() override {
@@ -29,9 +28,6 @@ public:
 		case CIRCLE_TYPE:
 			OutputDebugString(L"타원 버튼 눌러 짐\n");
 			container_->setShape(CIRCLE_TYPE);
-			break;
-		case APPLE:
-			OutputDebugString(L"사과 버튼 눌러 짐\n");
 			break;
 		}
 	}
@@ -48,6 +44,17 @@ public:
 		label_->setTitle(title_);
 	}
 
+};
+
+class ResetActionListener : public ActionListener {
+private:
+	PainterFrame* container_;
+	list <Group*> * targetList_;
+public:
+	ResetActionListener(PainterFrame* f, list <Group *> * targetList) :container_(f),targetList_(targetList) {}
+	void actionPerformed() override {
+		container_->resetList(targetList_);
+	}
 };
 
 PainterFrame::PainterFrame() :PainterFrame(L"", 800, 600) {
@@ -130,7 +137,7 @@ void PainterFrame::createGroup() {
 	invalidate();
 }
 
-Group * PainterFrame::findClickedElement(MyPoint pos) {
+Group* PainterFrame::findClickedElement(MyPoint pos) {
 	for (auto fig = myGroupList.begin(); fig != myGroupList.end(); fig++) {
 		if ((*fig)->isIn(pos) == true) {
 			OutputDebugString(L"도형 선택 됨\n");
@@ -148,7 +155,7 @@ MyButton* PainterFrame::findClickedButton(MyPoint pos) {
 			return (MyButton *)(*btn);
 		}
 	}
-	// 다 돌았는데 못찾으면 null 리턴
+	// 못찾으면 null 리턴
 	return nullptr;
 }
 
@@ -164,11 +171,24 @@ void PainterFrame::init() {
 	MyLabel* labelMain = new MyLabel(hDC_, 230, 5, 965, 115, "MAIN");
 	componentList.push_back(labelMain);
 
-	MyButton* btnApple = new MyButton(hDC_, 5, 70, 100, 115, "Apple", APPLE);
-	MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", APPLE);
-	btnApple->addActionListener(new SetLabelActionListener(labelMain, "Apple"));
+	MyButton* btnReset = new MyButton(hDC_, 5, 70, 100, 115, "Reset", RESET);
+	MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", BANANA);
+	btnReset->addActionListener(new ResetActionListener(this, &myGroupList));
 	btnBanana->addActionListener(new SetLabelActionListener(labelMain, "Banana"));
-	componentList.push_back(btnApple);
+	componentList.push_back(btnReset);
 	componentList.push_back(btnBanana);
+}
+
+void PainterFrame::resetList(list<Group*> *groupList) {
+	list <Group*> tempList;
+	for (auto i = groupList->begin(); i != groupList->end(); i++) {
+		tempList.push_back(*i);
+	}
+
+	for (auto i = tempList.begin(); i != tempList.end(); i++) {
+		groupList->remove(*i);
+		OutputDebugString(L"요소 삭제 됨\n");
+	}
+	OutputDebugString(L"리스트 초기화 완료\n");
 }
 
