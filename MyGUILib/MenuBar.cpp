@@ -8,9 +8,9 @@ MenuBar::MenuBar(HDC hDC, int l, int t, int r, int b, string title) :
 	// empty
 }
 
-//void MenuBar::addMenuButton(MenuButton* mb) {
-//	menuButtonList_->push_back(mb);
-//}
+void MenuBar::addMenuButton(MenuButton* mb) {
+	menuButtonList_->push_back(mb);
+}
 
 void MenuBar::draw() {
 	HPEN myPen = CreatePen(PS_SOLID, 1, RGB(0, 0, 0));
@@ -20,4 +20,8 @@ void MenuBar::draw() {
 
 	SelectObject(hDC_, oldPen);
 	DeleteObject(myPen);
+
+	for (auto i = menuButtonList_->begin(); i != menuButtonList_->end(); i++) {
+		(*i)->draw();
+	}
 }

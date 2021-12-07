@@ -9,6 +9,8 @@
 #include "Button.h"
 #include "ActionListener.h"
 #include "MyMenuBar.h"
+#include "MenuButton.h"
+#include "MenuItem.h"
 
 // 일단은 전역 변수 1개는 사용한다.
 int shape_;
@@ -56,6 +58,17 @@ public:
 	ResetActionListener(PainterFrame* f, list <Group *> * targetList) :container_(f),targetList_(targetList) {}
 	void actionPerformed() override {
 		container_->resetList(targetList_);
+	}
+};
+
+
+class DropDownActionListener : public ActionListener {
+private:
+	MenuButton* menuButton_;
+public:
+	DropDownActionListener(MenuButton* mb) :menuButton_(mb) {};
+	void actionPerformed() override {
+		menuButton_->showItems();
 	}
 };
 
@@ -182,7 +195,12 @@ void PainterFrame::init() {
 
 	MyMenuBar* menuBar = new MyMenuBar(hDC_, 0, 0, 1000, 60, "메인메뉴바");
 	componentList.push_back(menuBar);
-	menuBar->init();
+	MenuButton* menuBtnFigure = new MenuButton(hDC_, 0, 0, 100, 60, "도형");
+	MenuItem* menuItemRectangle = new MenuItem(hDC_, 0, 100, 100, 120, "사각형", menuBtnFigure);
+	menuBtnFigure->addActionListener(new DropDownActionListener(menuBtnFigure));
+	menuBtnFigure->addItem(menuItemRectangle);
+	menuBar->addMenuButton(menuBtnFigure);
+	//menuBar->init();
 }
 
 void PainterFrame::resetList(list<Group*> *groupList) {
