@@ -8,7 +8,8 @@ MyLabel::MyLabel(HDC hDC, int l, int t, int r, int b, std::string title) :
 }
 
 
-void MyLabel::draw(int correctX, int correctY) {
+void MyLabel::draw() {
+	int correctX = 10, correctY = 10;
 	int centerX = left_ + ((right_ - left_) / 2) - correctX;
 	int centerY = top_ + ((bottom_ - top_) / 2) - correctY;
 

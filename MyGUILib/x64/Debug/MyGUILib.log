@@ -1,7 +1,7 @@
 ﻿  ActionListener.cpp
   Button.cpp
   Component.cpp
-C:\Users\mopil\source\repos\mopil\project7\OOP1_projcet_v2\MyGUILib\Component.cpp(14,73): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\mopil\source\repos\mopil\project7\OOP1_projcet_v2\MyGUILib\Component.cpp(15,73): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   frame.cpp
 C:\Users\mopil\source\repos\mopil\project7\OOP1_projcet_v2\MyGUILib\frame.cpp(86,48): warning C4302: '형식 캐스트': 'LPWSTR'에서 'WORD'(으)로 잘립니다.
   Label.cpp

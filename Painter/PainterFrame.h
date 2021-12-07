@@ -18,6 +18,7 @@ protected:
 
 	// 도형, 그룹 박스를 저장하는 리스트
 	std::list<Group*> myGroupList;
+	std::list<Component*> componentList;
 	std::list<MyButton*> myButtonList;
 	std::list<MyLabel*> myLabelList;
 

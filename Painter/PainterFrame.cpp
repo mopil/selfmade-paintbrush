@@ -96,38 +96,15 @@ void PainterFrame::eventHandler(MyEvent e)
 }
 
 void PainterFrame::repaint() {
-	// 버튼 그리기
-	for (auto i = myButtonList.begin(); i != myButtonList.end(); i++) {
-		int cX = 0, cY = 0;
-		switch ((*i)->getType()) {
-		case RECTANGLE:
-			cX = RECT_CORRECT_X;
-			cY = RECT_CORRECT_Y;
-			break;
-		case CIRCLE:
-			cX = CIRCLE_CORRECT_X;
-			cY = CIRCLE_CORRECT_Y;
-			break;
-		case APPLE:
-			cX = APPLE_CORRECT_X;
-			cY = APPLE_CORRECT_Y;
-			break;
-		case BANANA:
-			cX = BANANA_CORRECT_X;
-			cY = BANANA_CORRECT_Y;
-			break;
-		}
-		(*i)->draw(cX,cY);
-	}
 
 	// 도형 그리기
 	for (auto i = myGroupList.begin(); i != myGroupList.end(); i++) {
 		(*i)->draw();
 	}
 
-	// 라벨 그리기
-	for (auto i = myLabelList.begin(); i != myLabelList.end(); i++) {
-		(*i)->draw(0,0);
+	// 컴포넌트 그리기
+	for (auto i = componentList.begin(); i != componentList.end(); i++) {
+		(*i)->draw();
 	}
 
 }
@@ -165,10 +142,10 @@ Group * PainterFrame::findClickedElement(MyPoint pos) {
 }
 
 MyButton* PainterFrame::findClickedButton(MyPoint pos) {
-	for (auto btn = myButtonList.begin(); btn != myButtonList.end(); btn++) {
-		if ((*btn)->isIn(pos) == true) {
+	for (auto btn = componentList.begin(); btn != componentList.end(); btn++) {
+		if ( ((MyButton *)(*btn))->isIn(pos) == true) {
 			OutputDebugString(L"버튼 선택 됨\n");
-			return (*btn);
+			return (MyButton *)(*btn);
 		}
 	}
 	// 다 돌았는데 못찾으면 null 리턴
@@ -178,20 +155,20 @@ MyButton* PainterFrame::findClickedButton(MyPoint pos) {
 void PainterFrame::init() {
 	MyButton* btnRect = new MyButton(hDC_, 5, 5, 100, 50, "Rectangle", RECTANGLE);
 	MyButton* btnCircle = new MyButton(hDC_, 120, 5, 215, 50, "Circle", CIRCLE);
-	myButtonList.push_back(btnRect);
-	myButtonList.push_back(btnCircle);
+	componentList.push_back(btnRect);
+	componentList.push_back(btnCircle);
 	btnRect->addActionListener(new SetShapeActionListener(this, RECTANGLE));
 	btnCircle->addActionListener(new SetShapeActionListener(this, CIRCLE));
 
 	// 라벨 설정
 	MyLabel* labelMain = new MyLabel(hDC_, 230, 5, 965, 115, "MAIN");
-	myLabelList.push_back(labelMain);
+	componentList.push_back(labelMain);
 
 	MyButton* btnApple = new MyButton(hDC_, 5, 70, 100, 115, "Apple", APPLE);
 	MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", APPLE);
 	btnApple->addActionListener(new SetLabelActionListener(labelMain, "Apple"));
 	btnBanana->addActionListener(new SetLabelActionListener(labelMain, "Banana"));
-	myButtonList.push_back(btnApple);
-	myButtonList.push_back(btnBanana);
+	componentList.push_back(btnApple);
+	componentList.push_back(btnBanana);
 }
 

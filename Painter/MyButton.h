@@ -11,7 +11,6 @@ private:
 	int type_;
 public:
 	MyButton(HDC hDC, int l, int t, int r, int b, std::string title,int type);
-	//void draw(int correctX, int correctY) override;
 	int getType();
 };
 
