@@ -11,6 +11,7 @@ public :
 	Component(HDC hDC, int l, int t, int r, int b, std::string title);
 	virtual void draw();
 	virtual void setTitle(std::string title);
+	std::string getTitle();
 
 };
 

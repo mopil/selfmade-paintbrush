@@ -9,33 +9,12 @@
 #include "Button.h"
 #include "ActionListener.h"
 #include "MyMenuBar.h"
-#include "MyMenuButton.h"
+#include "FigureMenuButton.h"
 #include "MenuItem.h"
 
 // 일단은 전역 변수 1개는 사용한다.
 int shape_;
 
-class SetShapeActionListener : public ActionListener {
-private:
-	PainterFrame* container_ = nullptr;
-	int type_;
-	static const int RECT_TYPE = 2;
-	static const int CIRCLE_TYPE = 3;
-public:
-	SetShapeActionListener(PainterFrame* f, int type) :container_(f), type_(type) {}
-	void actionPerformed() override {
-		switch (type_) {
-		case RECT_TYPE:
-			OutputDebugString(L"사각형 버튼 눌러 짐\n");
-			container_->setShape(RECT_TYPE);
-			break;
-		case CIRCLE_TYPE:
-			OutputDebugString(L"타원 버튼 눌러 짐\n");
-			container_->setShape(CIRCLE_TYPE);
-			break;
-		}
-	}
-};
 
 class SetLabelActionListener : public ActionListener {
 private:
@@ -206,7 +185,7 @@ void PainterFrame::init() {
 
 	//MyMenuBar* menuBar = new MyMenuBar(hDC_, 0, 0, 1000, 60, "메인메뉴바");
 	//componentList.push_back(menuBar);
-	MyMenuButton* menuBtnFigure = new MyMenuButton(hDC_, 0, 0, 100, 60, "도형");
+	FigureMenuButton* menuBtnFigure = new FigureMenuButton(hDC_, 0, 0, 100, 60, "도형", this);
 	menuBtnFigure->addActionListener(new DropDownActionListener(menuBtnFigure, this));
 	componentList.push_back(menuBtnFigure);
 	//menuBar->addMenuButton(menuBtnFigure);
@@ -226,3 +205,21 @@ void PainterFrame::resetList(list<Group*> *groupList) {
 	OutputDebugString(L"리스트 초기화 완료\n");
 }
 
+void PainterFrame::addComponent(Component* c) {
+	componentList.push_back(c);
+}
+
+void PainterFrame::removeComponent(std::string title) {
+	list <Component*> tempList;
+	for (auto i = componentList.begin(); i != componentList.end(); i++) {
+		tempList.push_back(*i);
+	}
+
+	for (auto i = tempList.begin(); i != tempList.end(); i++) {
+		if (title == (*i)->getTitle()) {
+			componentList.remove(*i);
+			OutputDebugString(L"요소 삭제 됨\n");
+			return;
+		}
+	}
+}

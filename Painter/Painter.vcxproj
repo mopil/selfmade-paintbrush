@@ -147,7 +147,7 @@
     <ClInclude Include="MyButton.h" />
     <ClInclude Include="MyLabel.h" />
     <ClInclude Include="MyMenuBar.h" />
-    <ClInclude Include="MyMenuButton.h" />
+    <ClInclude Include="FigureMenuButton.h" />
     <ClInclude Include="PainterFrame.h" />
     <ClInclude Include="Rect.h" />
   </ItemGroup>
@@ -160,7 +160,7 @@
     <ClCompile Include="MyButton.cpp" />
     <ClCompile Include="MyLabel.cpp" />
     <ClCompile Include="MyMenuBar.cpp" />
-    <ClCompile Include="MyMenuButton.cpp" />
+    <ClCompile Include="FigureMenuButton.cpp" />
     <ClCompile Include="PainterFrame.cpp" />
     <ClCompile Include="Rect.cpp" />
   </ItemGroup>

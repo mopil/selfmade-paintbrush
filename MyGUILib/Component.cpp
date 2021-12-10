@@ -18,3 +18,5 @@ void Component::draw() {
 void Component::setTitle(std::string title) {
 	title_ = title;
 }
+
+std::string Component::getTitle() { return title_; }

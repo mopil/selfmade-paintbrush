@@ -42,7 +42,7 @@
     <ClInclude Include="MyMenuBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="MyMenuButton.h">
+    <ClInclude Include="FigureMenuButton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClCompile Include="MyMenuBar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="MyMenuButton.cpp">
+    <ClCompile Include="FigureMenuButton.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

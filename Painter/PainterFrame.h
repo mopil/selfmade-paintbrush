@@ -53,6 +53,8 @@ public:
 	MyButton * findClickedButton(MyPoint pos);
 
 	void resetList(list<Group*>*);
+	void addComponent(Component* c);
+	void removeComponent(std::string title);
 	
 };
 
