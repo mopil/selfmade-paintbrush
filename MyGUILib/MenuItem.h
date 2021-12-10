@@ -1,15 +1,10 @@
 #pragma once
-#include "Component.h"
+#include "Button.h"
 #include <string>
 using namespace std;
-class MenuButton;
-class MenuItem : public Component {
-protected:
-	MenuButton* parentButton_;
+class MenuItem : public Button {
 public:
-	MenuItem(HDC hDC, int l, int t, int r, int b, string title, MenuButton *parent);
-	void draw(int nextY);
-	void draw();
-	MenuButton* getParent();
+	MenuItem(HDC hDC, int l, int t, int r, int b, string title);
+	virtual void draw();
 };
 

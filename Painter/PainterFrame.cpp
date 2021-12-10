@@ -9,7 +9,7 @@
 #include "Button.h"
 #include "ActionListener.h"
 #include "MyMenuBar.h"
-#include "MenuButton.h"
+#include "MyMenuButton.h"
 #include "MenuItem.h"
 
 // 일단은 전역 변수 1개는 사용한다.
@@ -64,11 +64,21 @@ public:
 
 class DropDownActionListener : public ActionListener {
 private:
+	PainterFrame* container_;
 	MenuButton* menuButton_;
 public:
-	DropDownActionListener(MenuButton* mb) :menuButton_(mb) {};
+	DropDownActionListener(MenuButton* mb, PainterFrame *c) :menuButton_(mb),container_(c) {};
 	void actionPerformed() override {
-		menuButton_->showItems();
+		// isDropped == false
+		if (menuButton_->getState() == false) {
+			menuButton_->openItems();
+		}
+		// isDropped == true
+		else {
+			menuButton_->closeItems();
+		}
+		menuButton_->toggle();
+		container_->invalidate();
 	}
 };
 
@@ -118,6 +128,7 @@ void PainterFrame::eventHandler(MyEvent e)
 }
 
 void PainterFrame::repaint() {
+	//OutputDebugString(L"repaint 호출 됨\n");
 
 	// 도형 그리기
 	for (auto i = myGroupList.begin(); i != myGroupList.end(); i++) {
@@ -193,13 +204,12 @@ void PainterFrame::init() {
 	//componentList.push_back(btnReset);
 	//componentList.push_back(btnBanana);
 
-	MyMenuBar* menuBar = new MyMenuBar(hDC_, 0, 0, 1000, 60, "메인메뉴바");
-	componentList.push_back(menuBar);
-	MenuButton* menuBtnFigure = new MenuButton(hDC_, 0, 0, 100, 60, "도형");
-	MenuItem* menuItemRectangle = new MenuItem(hDC_, 0, 100, 100, 120, "사각형", menuBtnFigure);
-	menuBtnFigure->addActionListener(new DropDownActionListener(menuBtnFigure));
-	menuBtnFigure->addItem(menuItemRectangle);
-	menuBar->addMenuButton(menuBtnFigure);
+	//MyMenuBar* menuBar = new MyMenuBar(hDC_, 0, 0, 1000, 60, "메인메뉴바");
+	//componentList.push_back(menuBar);
+	MyMenuButton* menuBtnFigure = new MyMenuButton(hDC_, 0, 0, 100, 60, "도형");
+	menuBtnFigure->addActionListener(new DropDownActionListener(menuBtnFigure, this));
+	componentList.push_back(menuBtnFigure);
+	//menuBar->addMenuButton(menuBtnFigure);
 	//menuBar->init();
 }
 
