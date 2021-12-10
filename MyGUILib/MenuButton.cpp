@@ -1,8 +1,8 @@
 #include "MenuButton.h"
 #include "MenuItem.h"
 
-MenuButton::MenuButton(HDC hDC, int l, int t, int r, int b, string title) 
-	: Button(hDC, l, t, r, b, title),isDropped_(false)
+MenuButton::MenuButton(HDC hDC, int l, int t, int r, int b, string title, int id) 
+	: Button(hDC, l, t, r, b, title, id),isDropped_(false)
 {
 	// empty
 }

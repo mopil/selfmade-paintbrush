@@ -1,8 +1,10 @@
 #include "Component.h"
+#include "ActionListener.h"
+#include "Misc.h"
 
 
-Component::Component(HDC hDC, int l, int t, int r, int b, std::string title) :
-	hDC_(hDC), left_(l), top_(t), right_(r), bottom_(b), title_(title)
+Component::Component(HDC hDC, int l, int t, int r, int b, string title, string type, int id) :
+	hDC_(hDC), left_(l), top_(t), right_(r), bottom_(b), title_(title), type_(type), id_(id)
 {
 	// empty
 }
@@ -15,8 +17,23 @@ void Component::draw() {
 	TextOutA(hDC_, centerX, centerY, title_.c_str(), strlen(title_.c_str()));
 }
 
-void Component::setTitle(std::string title) {
+void Component::setTitle(string title) {
 	title_ = title;
 }
 
-std::string Component::getTitle() { return title_; }
+string Component::getTitle() { return title_; }
+string Component::getType() { return type_; }
+int Component::getId() { return id_; }
+
+bool Component::isIn(MyPoint pos) {
+	if ((left_ <= pos.x_ && top_ <= pos.y_) && (right_ >= pos.x_ && bottom_ >= pos.y_)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+void Component::addActionListener(ActionListener* l) {
+	listeners_.push_back(l);
+}

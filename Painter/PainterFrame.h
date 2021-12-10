@@ -1,14 +1,12 @@
 #pragma once
-#include "Windows.h"
 #include <string>
 #include <list>
-#include "Misc.h"
-#include "Figure.h"
-#include "MyButton.h"
 #include "frame.h"
-#include "MyLabel.h"
+using namespace std;
 
-class MyButton;
+class Button;
+class Component;
+class Group;
 class PainterFrame : public Frame{
 protected:
 
@@ -17,8 +15,8 @@ protected:
 	MyPoint end_;
 
 	// 도형, 그룹 박스를 저장하는 리스트
-	std::list<Group*> myGroupList;
-	std::list<Component*> componentList;
+	list<Group*> myGroupList;
+	list<Component*> componentList;
 
 	// 도형 타입 변수 설정
 	static const int NONE = 1;
@@ -36,13 +34,9 @@ protected:
 	//static const int BANANA_CORRECT_X = 16;
 	//static const int BANANA_CORRECT_Y = 6;
 
-
-	static const int RESET = 4;
-	static const int BANANA = 5;
-
 public:
 	PainterFrame();
-	PainterFrame(std::wstring, int, int);
+	PainterFrame(wstring, int, int);
 	void eventHandler(MyEvent e) override;
 	void repaint() override;
 	void init() override;
@@ -50,11 +44,14 @@ public:
 	void setShape(int type);
 	void createGroup();
 	Group* findClickedElement(MyPoint pos);
-	MyButton * findClickedButton(MyPoint pos);
+	Button * findClickedButton(MyPoint pos);
 
 	void resetList(list<Group*>*);
 	void addComponent(Component* c);
-	void removeComponent(std::string title);
+	void removeComponent(string title);
+
+	void toggleAll();
+	Component* getComponent(string type, int id);
 	
 };
 

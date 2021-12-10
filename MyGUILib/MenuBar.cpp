@@ -2,8 +2,8 @@
 #include "ActionListener.h"
 #include "MenuButton.h"
 
-MenuBar::MenuBar(HDC hDC, int l, int t, int r, int b, string title) :
-	Component(hDC, l, t, r, b, title)
+MenuBar::MenuBar(HDC hDC, int l, int t, int r, int b, string title, int id) :
+	Component(hDC, l, t, r, b, title,"MenuBar", id)
 {
 	// empty
 }

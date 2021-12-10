@@ -5,12 +5,11 @@
 #include "Rect.h"
 #include "GroupBox.h"
 #include <iostream>
-#include "MyButton.h"
 #include "Button.h"
 #include "ActionListener.h"
-#include "MyMenuBar.h"
 #include "FigureMenuButton.h"
 #include "MenuItem.h"
+#include "Label.h"
 
 // 일단은 전역 변수 1개는 사용한다.
 int shape_;
@@ -18,11 +17,11 @@ int shape_;
 
 class SetLabelActionListener : public ActionListener {
 private:
-	MyLabel* label_;
+	Label* label_;
 	string title_;
 
 public:
-	SetLabelActionListener(MyLabel* l, string title) :label_(l),title_(title) {}
+	SetLabelActionListener(Label* l, string title) :label_(l),title_(title) {}
 	void actionPerformed() override {
 		label_->setTitle(title_);
 	}
@@ -74,7 +73,7 @@ void PainterFrame::eventHandler(MyEvent e)
 	}
 	else if (e.isLButtonUp()) {
 		end_ = e.getPos();
-		MyButton* selectedButton = findClickedButton(end_);
+		Button* selectedButton = findClickedButton(end_);
 		if (selectedButton != nullptr) {
 			selectedButton->onClick();
 		}
@@ -153,11 +152,11 @@ Group* PainterFrame::findClickedElement(MyPoint pos) {
 	return nullptr;
 }
 
-MyButton* PainterFrame::findClickedButton(MyPoint pos) {
+Button* PainterFrame::findClickedButton(MyPoint pos) {
 	for (auto btn = componentList.begin(); btn != componentList.end(); btn++) {
-		if ( ((MyButton *)(*btn))->isIn(pos) == true) {
+		if ( ((Button *)(*btn))->isIn(pos) == true) {
 			OutputDebugString(L"버튼 선택 됨\n");
-			return (MyButton *)(*btn);
+			return (Button *)(*btn);
 		}
 	}
 	// 못찾으면 null 리턴
@@ -165,31 +164,24 @@ MyButton* PainterFrame::findClickedButton(MyPoint pos) {
 }
 
 void PainterFrame::init() {
-	//MyButton* btnRect = new MyButton(hDC_, 5, 5, 100, 50, "Rectangle", RECTANGLE);
-	//MyButton* btnCircle = new MyButton(hDC_, 120, 5, 215, 50, "Circle", CIRCLE);
-	//componentList.push_back(btnRect);
-	//componentList.push_back(btnCircle);
-	//btnRect->addActionListener(new SetShapeActionListener(this, RECTANGLE));
-	//btnCircle->addActionListener(new SetShapeActionListener(this, CIRCLE));
 
-	//// 라벨 설정
-	//MyLabel* labelMain = new MyLabel(hDC_, 230, 5, 965, 115, "MAIN");
-	//componentList.push_back(labelMain);
-
-	//MyButton* btnReset = new MyButton(hDC_, 5, 70, 100, 115, "Reset", RESET);
+	// 도형 상태 라벨
+	Label* labelMain = new Label(hDC_, 500, 0, 700, 60, "현재 도형 : 없음",2001);
+	componentList.push_back(labelMain);
+	
 	//MyButton* btnBanana = new MyButton(hDC_, 120, 70, 215, 115, "Banana", BANANA);
-	//btnReset->addActionListener(new ResetActionListener(this, &myGroupList));
 	//btnBanana->addActionListener(new SetLabelActionListener(labelMain, "Banana"));
-	//componentList.push_back(btnReset);
 	//componentList.push_back(btnBanana);
 
-	//MyMenuBar* menuBar = new MyMenuBar(hDC_, 0, 0, 1000, 60, "메인메뉴바");
-	//componentList.push_back(menuBar);
-	FigureMenuButton* menuBtnFigure = new FigureMenuButton(hDC_, 0, 0, 100, 60, "도형", this);
+	// 도형 메뉴버튼
+	FigureMenuButton* menuBtnFigure = new FigureMenuButton(hDC_, 0, 0, 100, 60, "도형", 4,this);
 	menuBtnFigure->addActionListener(new DropDownActionListener(menuBtnFigure, this));
 	componentList.push_back(menuBtnFigure);
-	//menuBar->addMenuButton(menuBtnFigure);
-	//menuBar->init();
+
+	// 리셋 버튼
+	Button* btnReset = new Button(hDC_, 300, 0, 400, 60, "리셋",1001);
+	btnReset->addActionListener(new ResetActionListener(this, &myGroupList));
+	componentList.push_back(btnReset);
 }
 
 void PainterFrame::resetList(list<Group*> *groupList) {
@@ -220,6 +212,23 @@ void PainterFrame::removeComponent(std::string title) {
 			componentList.remove(*i);
 			OutputDebugString(L"요소 삭제 됨\n");
 			return;
+		}
+	}
+}
+void PainterFrame::toggleAll() {
+	for (auto btn = componentList.begin(); btn != componentList.end(); btn++) {
+		if (((MenuButton*)(*btn))->getState() == true || ((MenuButton*)(*btn))->getState() == false) {
+			OutputDebugString(L"토글\n");
+			((MenuButton*)(*btn))->toggle();
+		}
+	}
+}
+
+Component* PainterFrame::getComponent(string type, int id) {
+	for (auto c = componentList.begin(); c != componentList.end(); c++) {
+		if ( (*c)->getId() == id) {
+			if (type == "Button") return (Button*)(*c);
+			if (type == "Label") return (Label*)(*c);
 		}
 	}
 }

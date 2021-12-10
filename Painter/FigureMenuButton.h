@@ -5,7 +5,7 @@ class FigureMenuButton : public MenuButton {
 private:
 	PainterFrame* container_;
 public:
-	FigureMenuButton(HDC hDC, int l, int t, int r, int b, string title, PainterFrame *p);
+	FigureMenuButton(HDC hDC, int l, int t, int r, int b, string title, int id, PainterFrame *p);
 	void openItems() override;
 	void closeItems() override;
 };
