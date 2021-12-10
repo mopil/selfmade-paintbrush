@@ -1,1 +1,8 @@
-﻿  Painter.vcxproj -> C:\Users\mopil\source\repos\mopil\project7\OOP1_projcet_v2\x64\Debug\Painter.exe
+﻿  Circle.cpp
+  ColorMenuButton.cpp
+  FigureMenuButton.cpp
+  PainterFrame.cpp
+  main.cpp
+  코드를 생성하고 있습니다...
+C:\Users\mopil\source\repos\mopil\project7\OOP1_projcet_v2\Painter\PainterFrame.cpp(251): warning C4715: 'PainterFrame::getComponent': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  Painter.vcxproj -> C:\Users\mopil\source\repos\mopil\project7\OOP1_projcet_v2\x64\Debug\Painter.exe

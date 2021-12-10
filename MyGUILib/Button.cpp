@@ -6,9 +6,3 @@ Button::Button(HDC hDC, int l, int t, int r, int b, string title, int id)
 {
 	// empty
 }
-
-void Button::onClick() {
-	for (auto i : listeners_) {
-		i->actionPerformed();
-	}
-}

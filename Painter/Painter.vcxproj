@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="ColorMenuButton.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="Group.h" />
     <ClInclude Include="GroupBox.h" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="ColorMenuButton.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Group.cpp" />
     <ClCompile Include="GroupBox.cpp" />

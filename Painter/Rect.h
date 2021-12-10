@@ -1,9 +1,11 @@
 #pragma once
 #include "Figure.h"
+#include <string>
+using namespace std;
 
 class Rect : public Figure {
 public:
-	Rect(HDC hDC, int l, int t, int r, int b);
+	Rect(HDC hDC, int l, int t, int r, int b, string color);
 	void addPosition(int amountX, int amountY) override;
 	void draw() override ;
 };

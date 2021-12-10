@@ -7,5 +7,4 @@ using namespace std;
 class Button : public Component{
 public:
 	Button(HDC hDC, int l, int t, int r, int b, string title, int id);
-	virtual void onClick();
 };

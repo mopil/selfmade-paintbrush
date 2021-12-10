@@ -20,6 +20,7 @@ public :
 	string getType();
 	int getId();
 
+	virtual void onClick();
 	virtual bool isIn(MyPoint pos);
 	virtual void addActionListener(ActionListener* l);
 

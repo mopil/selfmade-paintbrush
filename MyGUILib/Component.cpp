@@ -37,3 +37,9 @@ bool Component::isIn(MyPoint pos) {
 void Component::addActionListener(ActionListener* l) {
 	listeners_.push_back(l);
 }
+
+void Component::onClick() {
+	for (auto i : listeners_) {
+		i->actionPerformed();
+	}
+}

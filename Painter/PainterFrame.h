@@ -23,16 +23,6 @@ protected:
 	static const int RECTANGLE = 2;
 	static const int CIRCLE = 3;
 
-	// 버튼 타이틀 가운데 정렬 보정 상수
-	//static const int RECT_CORRECT_X = 32;
-	//static const int RECT_CORRECT_Y = 8;
-	//static const int CIRCLE_CORRECT_X = 18;
-	//static const int CIRCLE_CORRECT_Y = 6;
-
-	//static const int APPLE_CORRECT_X = 18;
-	//static const int APPLE_CORRECT_Y = 8;
-	//static const int BANANA_CORRECT_X = 16;
-	//static const int BANANA_CORRECT_Y = 6;
 
 public:
 	PainterFrame();
@@ -41,7 +31,8 @@ public:
 	void repaint() override;
 	void init() override;
 
-	void setShape(int type);
+	void setShape(string type);
+	void setColor(string color);
 	void createGroup();
 	Group* findClickedElement(MyPoint pos);
 	Button * findClickedButton(MyPoint pos);
