@@ -18,12 +18,6 @@ protected:
 	list<Group*> myGroupList;
 	list<Component*> componentList;
 
-	// 도형 타입 변수 설정
-	static const int NONE = 1;
-	static const int RECTANGLE = 2;
-	static const int CIRCLE = 3;
-
-
 public:
 	PainterFrame();
 	PainterFrame(wstring, int, int);
@@ -37,11 +31,9 @@ public:
 	Group* findClickedElement(MyPoint pos);
 	Button * findClickedButton(MyPoint pos);
 
-	void resetList(list<Group*>*);
+	void resetList();
 	void addComponent(Component* c);
 	void removeComponent(string title);
-
-	void toggleAll();
 	Component* getComponent(string type, int id);
 	
 };

@@ -18,15 +18,15 @@ public:
 	}
 };
 
-class SetLabelActionListener : public ActionListener {
+class SetTitleActionListener : public ActionListener {
 private:
-	Label* label_;
+	Component* component_;
 	string title_;
 
 public:
-	SetLabelActionListener(Label* l, string title) :label_(l), title_(title) {}
+	SetTitleActionListener(Component* l, string title) :component_(l), title_(title) {}
 	void actionPerformed() override {
-		label_->setTitle(title_);
+		component_->setTitle(title_);
 	}
 
 };
@@ -40,14 +40,20 @@ FigureMenuButton::FigureMenuButton(HDC hDC, int l, int t, int r, int b, string t
 void FigureMenuButton::openItems() {
 	// 아이템 버튼 생성 (부모 버튼 0 0 100 60)
 	MenuItem* menuItemRectangle = new MenuItem(hDC_, 0, 60, 100, 120, "사각형",1201);
-	MenuItem* menuItemCircle = new MenuItem(hDC_, 0, 120, 100, 180, "타원",1202);
-
-	// 리스너 추가
-	Label* labelMain = (Label*)container_->getComponent("Label", 2001);
+	MenuItem* menuItemCircle = new MenuItem(hDC_, 0, 120, 100, 180, "원",1202);
 	menuItemRectangle->addActionListener(new SetShapeActionListener(container_, this, "Rectangle"));
 	menuItemCircle->addActionListener(new SetShapeActionListener(container_, this, "Circle"));
-	menuItemRectangle->addActionListener(new SetLabelActionListener(labelMain, "현재 도형 : 사각형 선택 됨"));
-	menuItemCircle->addActionListener(new SetLabelActionListener(labelMain, "현재 도형 : 원 선택 됨"));
+
+	// 버튼 눌렀을 때 메인라벨 구문 변경
+	Label* labelMain = (Label*)container_->getComponent("Label", 2001);
+	menuItemRectangle->addActionListener(new SetTitleActionListener(labelMain, "도형 사각형이 선택 됨"));
+	menuItemCircle->addActionListener(new SetTitleActionListener(labelMain, "도형 원이 선택 됨"));
+
+	// 버튼 눌렀을 때 도형 부모 버튼 구문 변경
+	Button* parent = (Button*)container_->getComponent("Button", 1);
+	menuItemRectangle->addActionListener(new SetTitleActionListener(parent, "사각형 "));
+	menuItemCircle->addActionListener(new SetTitleActionListener(parent, " 원"));
+
 	this->addItem(menuItemRectangle);
 	this->addItem(menuItemCircle);
 	container_->addComponent(menuItemRectangle);
@@ -57,5 +63,5 @@ void FigureMenuButton::openItems() {
 void FigureMenuButton::closeItems() {
 	MenuButton::closeItems();
 	container_->removeComponent("사각형");
-	container_->removeComponent("타원");
+	container_->removeComponent("원");
 }

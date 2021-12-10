@@ -142,7 +142,7 @@
     <ClInclude Include="ActionListener.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="frame.h" />
+    <ClInclude Include="Frame.h" />
     <ClInclude Include="Label.h" />
     <ClInclude Include="MenuBar.h" />
     <ClInclude Include="MenuButton.h" />
@@ -153,7 +153,7 @@
     <ClCompile Include="ActionListener.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="frame.cpp" />
+    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Label.cpp" />
     <ClCompile Include="MenuBar.cpp" />
     <ClCompile Include="MenuButton.cpp" />

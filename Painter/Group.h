@@ -1,7 +1,6 @@
 #pragma once
 #include <Windows.h>
-#include "Misc.h"
-
+class MyPoint;
 class Group {
 protected:
 	int left_, top_, right_, bottom_;

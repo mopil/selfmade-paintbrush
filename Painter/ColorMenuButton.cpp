@@ -13,22 +13,22 @@ private:
 public:
 	SetColorActionListener(PainterFrame* f, MenuButton* mb, string color) :container_(f), menuButton_(mb), color_(color) {}
 	void actionPerformed() override {
-		OutputDebugString(L"color º¯°æ µÊ\n");
+		//OutputDebugString(L"color º¯°æ µÊ\n");
 		container_->setColor(color_); 
 		menuButton_->closeItems();
 		menuButton_->toggle();
 	}
 };
 
-class SetLabelActionListener : public ActionListener {
+class SetTitleActionListener : public ActionListener {
 private:
-	Label* label_;
+	Component* component_;
 	string title_;
 
 public:
-	SetLabelActionListener(Label* l, string title) :label_(l), title_(title) {}
+	SetTitleActionListener(Component* l, string title) :component_(l), title_(title) {}
 	void actionPerformed() override {
-		label_->setTitle(title_);
+		component_->setTitle(title_);
 	}
 
 };
@@ -41,21 +41,29 @@ ColorMenuButton::ColorMenuButton(HDC hDC, int l, int t, int r, int b, string tit
 
 void ColorMenuButton::openItems() {
 	// ¾ÆÀÌÅÛ ¹öÆ° »ý¼º (ºÎ¸ð ¹öÆ° 0 0 100 60)
-	MenuItem* menuItemBlack = new MenuItem(hDC_, 100, 60, 200, 120, "°ËÁ¤", 1203);
-	MenuItem* menuItemRed = new MenuItem(hDC_, 100, 120, 200, 180, "»¡°­", 1204);
-	MenuItem* menuItemBlue = new MenuItem(hDC_, 100, 180, 200, 240, "ÆÄ¶û", 1205);
-	MenuItem* menuItemGreen = new MenuItem(hDC_, 100, 240, 200, 300, "ÃÊ·Ï", 1206);
+	MenuItem* menuItemBlack = new MenuItem(hDC_, 200, 60, 300, 120, "°ËÁ¤", 1203);
+	MenuItem* menuItemRed = new MenuItem(hDC_, 200, 120, 300, 180, "»¡°­", 1204);
+	MenuItem* menuItemBlue = new MenuItem(hDC_, 200, 180, 300, 240, "ÆÄ¶û", 1205);
+	MenuItem* menuItemGreen = new MenuItem(hDC_, 200, 240, 300, 300, "ÃÊ·Ï", 1206);
 
 	// ¸®½º³Ê Ãß°¡
 	Label* labelMain = (Label*)container_->getComponent("Label", 2001);
-	menuItemBlack->addActionListener(new SetLabelActionListener(labelMain, "ÇöÀç »ö±ò : °ËÁ¤ ¼±ÅÃ µÊ"));
-	menuItemRed->addActionListener(new SetLabelActionListener(labelMain, "ÇöÀç »ö±ò : »¡°­ ¼±ÅÃ µÊ"));
-	menuItemBlue->addActionListener(new SetLabelActionListener(labelMain, "ÇöÀç »ö±ò : ÆÄ¶û ¼±ÅÃ µÊ"));
-	menuItemGreen->addActionListener(new SetLabelActionListener(labelMain, "ÇöÀç »ö±ò : ÃÊ·Ï ¼±ÅÃ µÊ"));
+	menuItemBlack->addActionListener(new SetTitleActionListener(labelMain, "°ËÁ¤»ö ¼±ÅÃ µÊ"));
+	menuItemRed->addActionListener(new SetTitleActionListener(labelMain, "»¡°­»ö ¼±ÅÃ µÊ"));
+	menuItemBlue->addActionListener(new SetTitleActionListener(labelMain, "ÆÄ¶û»ö ¼±ÅÃ µÊ"));
+	menuItemGreen->addActionListener(new SetTitleActionListener(labelMain, "ÃÊ·Ï»ö ¼±ÅÃ µÊ"));
 	menuItemBlack->addActionListener(new SetColorActionListener(container_, this, "Black"));
 	menuItemRed->addActionListener(new SetColorActionListener(container_, this, "Red"));
 	menuItemBlue->addActionListener(new SetColorActionListener(container_, this, "Blue"));
 	menuItemGreen->addActionListener(new SetColorActionListener(container_, this, "Green"));
+
+	// »ö±ò »óÅÂ ¶óº§
+	Button* labelColor = (Button*)container_->getComponent("Button", 2);
+	menuItemBlack->addActionListener(new SetTitleActionListener(labelColor, " °ËÁ¤"));
+	menuItemRed->addActionListener(new SetTitleActionListener(labelColor, " »¡°­"));
+	menuItemBlue->addActionListener(new SetTitleActionListener(labelColor, " ÆÄ¶û"));
+	menuItemGreen->addActionListener(new SetTitleActionListener(labelColor, " ÃÊ·Ï"));
+
 	this->addItem(menuItemBlack);
 	this->addItem(menuItemRed);
 	this->addItem(menuItemBlue);

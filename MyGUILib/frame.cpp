@@ -1,4 +1,4 @@
-#include "frame.h"
+#include "Frame.h"
 // 일단은 전역 변수 1개는 사용한다.
 extern Frame* mainWindow;
 

@@ -6,6 +6,5 @@ using namespace std;
 class MenuItem : public Button {
 public:
 	MenuItem(HDC hDC, int l, int t, int r, int b, string title, int id);
-	virtual void draw();
 };
 

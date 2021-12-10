@@ -1,4 +1,5 @@
 #include "Group.h"
+#include "Misc.h"
 
 Group::Group(HDC hdc, int l, int t, int r, int b)
 	:hDC_(hdc), left_(l), top_(t), right_(r), bottom_(b)
