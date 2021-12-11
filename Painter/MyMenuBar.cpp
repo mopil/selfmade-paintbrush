@@ -60,6 +60,15 @@ public:
 
 };
 
+class SaveActionListner : public ActionListener {
+public:
+	PainterFrame* container_;
+	SaveActionListner(PainterFrame *c):container_(c){}
+	void actionPerformed() override {
+		container_->saveScreen();
+	}
+};
+
 MyMenuBar::MyMenuBar(HDC hDC, int id, PainterFrame* c) :
 	MenuBar(hDC, id), container_(c)
 {
@@ -77,15 +86,16 @@ void MyMenuBar::init() {
 	menuBtnFigure->addActionListener(new DropDownActionListener(menuBtnFigure, container_));
 	container_->addComponent(menuBtnFigure);
 
-	// 현재 도형 상태 출력 라벨
-	Label* labelFigure = new Label(hDC_, 100, 0, 200, 60, "빈칸", 2002);
-	labelFigure->addActionListener(new NoActionListener());
-	container_->addComponent(labelFigure);
-
 	// 색깔 메뉴버튼
-	ColorMenuButton* menuBtnColor = new ColorMenuButton(hDC_, 200, 0, 300, 60, "색깔", 2, container_);
+	ColorMenuButton* menuBtnColor = new ColorMenuButton(hDC_, 100, 0, 200, 60, "색깔", 2, container_);
 	menuBtnColor->addActionListener(new DropDownActionListener(menuBtnColor, container_));
 	container_->addComponent(menuBtnColor);
+
+	// 스크린샷
+	Button* saveButton = new Button(hDC_, 200, 0, 300, 60, "저장", 2002);
+	saveButton->addActionListener(new SaveActionListner(container_));
+	saveButton->addActionListener(new SetTitleActionListener(labelMain, "ScreenShot.png로 현재 화면 저장 됨"));
+	container_->addComponent(saveButton);
 
 	// 현재 도형 상태 출력 라벨
 	Label* labelColor = new Label(hDC_, 300, 0, 400, 60, "빈칸", 2003);

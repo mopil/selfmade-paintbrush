@@ -35,6 +35,8 @@ public:
 	void addComponent(Component* c);
 	void removeComponent(string title);
 	Component* getComponent(string type, int id);
+
+	void saveScreen();
 	
 };
 

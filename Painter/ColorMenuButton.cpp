@@ -41,10 +41,10 @@ ColorMenuButton::ColorMenuButton(HDC hDC, int l, int t, int r, int b, string tit
 
 void ColorMenuButton::openItems() {
 	// 아이템 버튼 생성 (부모 버튼 0 0 100 60)
-	MenuItem* menuItemBlack = new MenuItem(hDC_, 200, 60, 300, 120, "검정", 1203);
-	MenuItem* menuItemRed = new MenuItem(hDC_, 200, 120, 300, 180, "빨강", 1204);
-	MenuItem* menuItemBlue = new MenuItem(hDC_, 200, 180, 300, 240, "파랑", 1205);
-	MenuItem* menuItemGreen = new MenuItem(hDC_, 200, 240, 300, 300, "초록", 1206);
+	MenuItem* menuItemBlack = new MenuItem(hDC_, 100, 60, 200, 120, "검정", 1203);
+	MenuItem* menuItemRed = new MenuItem(hDC_, 100, 120, 200, 180, "빨강", 1204);
+	MenuItem* menuItemBlue = new MenuItem(hDC_, 100, 180, 200, 240, "파랑", 1205);
+	MenuItem* menuItemGreen = new MenuItem(hDC_, 100, 240, 200, 300, "초록", 1206);
 
 	// 리스너 추가
 	Label* labelMain = (Label*)container_->getComponent("Label", 2001);

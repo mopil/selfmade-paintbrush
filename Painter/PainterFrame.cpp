@@ -6,6 +6,7 @@
 #include "Button.h"
 #include "Label.h"
 #include "MyMenuBar.h"
+#include <atlimage.h>
 
 // 전역 변수
 string shape_;
@@ -156,4 +157,16 @@ Component* PainterFrame::getComponent(string type, int id) {
 			else if (type == "Label") return (Label*)(*c);
 		}
 	}
+}
+
+
+void PainterFrame::saveScreen() {
+	CImage image;
+	int cx = 980, cy = 760;
+	int color_depth = ::GetDeviceCaps(hDC_, BITSPIXEL);
+	image.Create(cx, cy, color_depth, 0);
+
+	::BitBlt(image.GetDC(), 0, 0, cx, cy, hDC_, 0, 0, SRCCOPY);
+	image.Save(L"ScreenShot.png", Gdiplus::ImageFormatPNG);
+	image.ReleaseDC();
 }
