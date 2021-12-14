@@ -19,6 +19,7 @@ protected:
 	list<Component*> componentList;
 
 public:
+	static PainterFrame* getFrame(wstring, int, int);
 	PainterFrame();
 	PainterFrame(wstring, int, int);
 	void eventHandler(MyEvent e) override;

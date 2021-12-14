@@ -80,8 +80,6 @@ Frame::Frame(std::wstring title, int width, int height) {
 	invalidate();
 }
 
-
-
 void Frame::run() {
 	HACCEL hAccelTable = LoadAccelerators(hInst_, MAKEINTRESOURCE(IDI_APPLICATION));
 

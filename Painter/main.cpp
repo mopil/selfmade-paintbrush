@@ -5,7 +5,7 @@
 Frame* mainWindow = nullptr;
 int main() {
 	try {
-		mainWindow = new PainterFrame(L"그림판", 1000,800);
+		mainWindow = PainterFrame::getFrame(L"그림판", 1000, 800);
 		mainWindow->init();
 		mainWindow->run();
 	}

@@ -17,6 +17,12 @@ PainterFrame::PainterFrame() :PainterFrame(L"", 800, 600) {
 }
 PainterFrame::PainterFrame(std::wstring title, int width, int height) :Frame(title,width,height){}
 
+PainterFrame* PainterFrame::getFrame(std::wstring title, int width, int height) {
+	static PainterFrame* instance_ = nullptr;
+	if (instance_ == nullptr) instance_ = new PainterFrame(title, width, height);
+	return instance_;
+}
+
 void PainterFrame::eventHandler(MyEvent e)
 {
 	Label* labelMain = (Label*)getComponent("Label", 2001);
