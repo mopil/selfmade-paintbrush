@@ -42,6 +42,9 @@
     <ClInclude Include="MenuItem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CheckBox.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp">
@@ -69,6 +72,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MenuItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckBox.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

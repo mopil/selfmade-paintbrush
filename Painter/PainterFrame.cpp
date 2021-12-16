@@ -11,6 +11,7 @@
 // 전역 변수
 string shape_;
 string color_;
+bool fill_ = false;
 
 PainterFrame::PainterFrame() :PainterFrame(L"", 800, 600) {
 	// empty
@@ -45,20 +46,20 @@ void PainterFrame::eventHandler(MyEvent e)
 			labelMain->setTitle("도형/그룹 이동 됨");
 		}
 		else if (shape_ == "Rectangle") {
-			myGroupList.push_back(new Rect(hDC_,start_.x_, start_.y_, end_.x_, end_.y_, color_));
+			myGroupList.push_back(new Rect(hDC_,start_.x_, start_.y_, end_.x_, end_.y_, color_, fill_));
 		}
 		else if (shape_ == "Circle") {
-			myGroupList.push_back(new Circle(hDC_, start_.x_, start_.y_, end_.x_, end_.y_, color_));
+			myGroupList.push_back(new Circle(hDC_, start_.x_, start_.y_, end_.x_, end_.y_, color_, fill_));
 		}
 		invalidate();
 	}
 	else if (e.isRButtonUp()) {
 		end_ = e.getPos();
 		if (shape_ == "Rectangle") {
-			myGroupList.push_back(new Rect(hDC_, start_.x_, start_.y_, end_.x_, end_.y_, color_));
+			myGroupList.push_back(new Rect(hDC_, start_.x_, start_.y_, end_.x_, end_.y_, color_, fill_));
 		}
 		else if (shape_ == "Circle") {
-			myGroupList.push_back(new Circle(hDC_, start_.x_, start_.y_, end_.x_, end_.y_, color_));
+			myGroupList.push_back(new Circle(hDC_, start_.x_, start_.y_, end_.x_, end_.y_, color_, fill_));
 		}
 		invalidate();
 	}
@@ -175,4 +176,9 @@ void PainterFrame::saveScreen() {
 	::BitBlt(image.GetDC(), 0, 0, cx, cy, hDC_, 0, 0, SRCCOPY);
 	image.Save(L"ScreenShot.png", Gdiplus::ImageFormatPNG);
 	image.ReleaseDC();
+}
+
+void PainterFrame::toggleFillMode() {
+	if (fill_ == true) fill_ = false;
+	else fill_ = true;
 }

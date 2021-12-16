@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="ActionListener.h" />
     <ClInclude Include="Button.h" />
+    <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="Label.h" />
@@ -152,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="ActionListener.cpp" />
     <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Label.cpp" />

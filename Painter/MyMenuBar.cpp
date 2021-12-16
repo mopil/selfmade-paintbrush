@@ -5,6 +5,19 @@
 #include "Group.h"
 #include "PainterFrame.h"
 #include "ColorMenuButton.h"
+#include "CheckBox.h"
+
+class ToggleModeActionListener : public ActionListener {
+private:
+	PainterFrame* container_;
+	CheckBox* checkBox_;
+public:
+	ToggleModeActionListener(PainterFrame* f, CheckBox* cb) :container_(f), checkBox_(cb) {}
+	void actionPerformed() override {
+		checkBox_->toggle();
+		container_->toggleFillMode();
+	}
+};
 
 
 class SetTitleActionListener : public ActionListener{
@@ -97,10 +110,11 @@ void MyMenuBar::init() {
 	saveButton->addActionListener(new SetTitleActionListener(labelMain, "ScreenShot.png로 현재 화면 저장 됨"));
 	container_->addComponent(saveButton);
 
-	// 현재 도형 상태 출력 라벨
-	Label* labelColor = new Label(hDC_, 300, 0, 400, 60, "빈칸", 2003);
-	labelColor->addActionListener(new NoActionListener());
-	container_->addComponent(labelColor);
+	// 체크박스
+	CheckBox * checkBox = new CheckBox(hDC_, 300, 0, 400, 60, "채우기", 2003);
+	checkBox->addActionListener(new ToggleModeActionListener(container_, checkBox));
+	checkBox->addActionListener(new SetTitleActionListener(labelMain, "채우기 눌러짐"));
+	container_->addComponent(checkBox);
 
 	// 리셋 버튼
 	Button* btnReset = new Button(hDC_, 400, 0, 500, 60, "리셋", 1001);

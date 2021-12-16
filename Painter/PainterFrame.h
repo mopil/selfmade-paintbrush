@@ -38,6 +38,7 @@ public:
 	Component* getComponent(string type, int id);
 
 	void saveScreen();
+	void toggleFillMode();
 	
 };
 

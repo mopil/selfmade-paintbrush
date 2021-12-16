@@ -5,7 +5,7 @@ using namespace std;
 
 class Circle : public Figure {
 public:
-	Circle(HDC hDC, int l, int t, int r, int b, string color);
+	Circle(HDC hDC, int l, int t, int r, int b, string color, bool fiil);
 	void draw() override;
 	void addPosition(int amountX, int amountY) override;
 };
